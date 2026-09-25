@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plazas de Valencia | El latido de la ciudad</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mediterranean: {
+                            50: '#fdf8f6',
+                            100: '#fbeee6',
+                            500: '#e07a5f',
+                            600: '#d56143',
+                            700: '#b84a2c',
+                            800: '#943c24',
+                        },
+                        valencia: {
+                            blue: '#1d3557',
+                            sand: '#f4f1de',
+                            terracotta: '#e07a5f',
+                            sun: '#f4a261',
+                            green: '#2a9d8f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1543785307-160a37f29e12?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 dark:bg-stone-950 text-stone-800 dark:text-stone-100 transition-colors duration-300 min-h-screen flex flex-col justify-between">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-stone-900/80 border-b border-stone-200 dark:border-stone-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-mediterranean-500 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-landmark text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-xl tracking-tight text-stone-900 dark:text-white">Plazas de Valencia</span>
+                    <span class="block text-xs text-stone-500 dark:text-stone-400 font-medium tracking-wider uppercase">Guía Turística</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#plazas" class="hover:text-mediterranean-500 transition-colors">Plazas</a>
+                <a href="#itinerarios" class="hover:text-mediterranean-500 transition-colors">Itinerarios</a>
+                <a href="#mapa-interactivo" class="hover:text-mediterranean-500 transition-colors">Mapa Estilizado</a>
+                <a href="#consejos" class="hover:text-mediterranean-500 transition-colors">Consejos</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" aria-label="Cambiar modo oscuro" class="w-10 h-10 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="Abrir menú" class="md:hidden w-10 h-10 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-700 dark:text-stone-300">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800">
+            <a href="#plazas" class="block py-2 font-medium hover:text-mediterranean-500">Plazas</a>
+            <a href="#itinerarios" class="block py-2 font-medium hover:text-mediterranean-500">Itinerarios</a>
+            <a href="#mapa-interactivo" class="block py-2 font-medium hover:text-mediterranean-500">Mapa Estilizado</a>
+            <a href="#consejos" class="block py-2 font-medium hover:text-mediterranean-500">Consejos</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="hero-bg relative min-h-[580px] flex items-center justify-center text-center px-4 py-20 text-white">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-xs uppercase tracking-widest font-semibold text-stone-100 border border-white/30">
+                    <i class="fa-solid fa-compass text-mediterranean-500"></i> Descubre el corazón valenciano
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                    El latido de Valencia a través de sus <span class="text-mediterranean-500 bg-white/10 px-2 rounded-lg">plazas emblemáticas</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-light">
+                    Pasea por rincones llenos de historia, aroma a azahar, arquitectura gótica y terrazas mediterráneas inigualables.
+                </p>
+
+                <!-- Search & Filters -->
+                <div class="mt-8 max-w-2xl mx-auto bg-white/95 dark:bg-stone-900/95 backdrop-blur-lg p-3 sm:p-4 rounded-2xl shadow-2xl border border-white/20 dark:border-stone-800">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-grow">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+                                <i class="fa-solid fa-search"></i>
+                            </span>
+                            <input type="text" id="search-input" placeholder="Busca una plaza (ej: Ayuntamiento, Virgen...)" class="w-full pl-10 pr-4 py-3 bg-stone-100 dark:bg-stone-800 rounded-xl text-stone-900 dark:text-stone-100 placeholder-stone-400 text-sm focus:outline-none focus:ring-2 focus:ring-mediterranean-500 transition-all">
+                        </div>
+                        <div class="flex gap-2">
+                            <select id="category-filter" aria-label="Filtrar por categoría" class="bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mediterranean-500 transition-all">
+                                <option value="all">Todas las categorías</option>
+                                <option value="historica">Histórica</option>
+                                <option value="monumental">Monumental</option>
+                                <option value="comercial">Comercial / Ocio</option>
+                                <option value="bohemia">Bohemia / Encanto</option>
+                            </select>
+                            <button id="search-btn" class="bg-mediterranean-500 hover:bg-mediterranean-600 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors shadow-md">
+                                Explorar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plazas Grid Section -->
+        <section id="plazas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-mediterranean-500 font-semibold text-sm uppercase tracking-wider">Patrimonio urbano</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-900 dark:text-white mt-1">Plazas Principales</h2>
+                </div>
+                <p class="text-stone-600 dark:text-stone-400 max-w-md mt-2 md:mt-0 text-sm">
+                    Haz clic en cualquier tarjeta para explorar la historia completa, curiosidades exclusivas y los mejores puntos de interés cercanos.
+                </p>
+            </div>
+
+            <!-- Cards Container -->
+            <div id="plazas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript will dynamically render cards here -->
+            </div>
+
+            <!-- No results feedback -->
+            <div id="no-results" class="hidden text-center py-16">
+                <div class="w-16 h-16 bg-stone-200 dark:bg-stone-800 rounded-full flex items-center justify-center mx-auto text-stone-400 text-2xl mb-4">
+                    <i class="fa-solid fa-face-frown"></i>
+                </div>
+                <h3 class="text-lg font-bold text-stone-700 dark:text-stone-300">No se encontraron plazas</h3>
+                <p class="text-stone-500 dark:text-stone-400 text-sm mt-1">Prueba con otros términos de búsqueda o filtros.</p>
+            </div>
+        </section>
+
+        <!-- Itineraries Section -->
+        <section id="itinerarios" class="bg-stone-100 dark:bg-stone-900/50 py-20 border-y border-stone-200 dark:border-stone-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-mediterranean-500 font-semibold text-sm uppercase tracking-wider">Rutas temáticas</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-900 dark:text-white mt-1">Itinerarios Recomendados</h2>
+                    <p class="text-stone-600 dark:text-stone-400 text-sm mt-2">
+                        Aprovecha al máximo tu visita con nuestras rutas diseñadas para recorrer las plazas con sentido histórico o gastronómico.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Itinerary 1 -->
+                    <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-mediterranean-100 dark:bg-mediterranean-900/30 text-mediterranean-600 dark:text-mediterranean-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-shoe-prints mr-1.5"></i> Ruta Histórica y Monumental
+                                </span>
+                                <span class="text-xs text-stone-500 font-medium">~2.5 horas</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-stone-900 dark:text-white mb-2">De la Silla Real al Gótico Valenciano</h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-sm mb-6">
+                                Un recorrido fascinante por los centros de poder religioso, cívico y comercial del medievo valenciano.
+                            </p>
+                            <!-- Steps -->
+                            <div class="space-y-4 relative pl-6 border-l-2 border-mediterranean-500/30">
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-mediterranean-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">1. Plaza de la Reina</h4>
+                                    <p class="text-xs text-stone-500">Punto de partida junto a la imponente Torre del Micalet.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-mediterranean-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">2. Plaza de la Virgen</h4>
+                                    <p class="text-xs text-stone-500">Visita a la fuente de Neptuno y la Basílica de los Desamparados.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-mediterranean-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">3. Plaza del Mercado</h4>
+                                    <p class="text-xs text-stone-500">Parada final en la Lonja de la Seda y el Mercado Central.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
+                            <span class="text-xs text-stone-500"><i class="fa-solid fa-map-pin text-mediterranean-500 mr-1"></i> 3 paradas clave</span>
+                            <button onclick="openItineraryModal('Ruta Histórica y Monumental')" class="text-xs font-semibold text-mediterranean-600 dark:text-mediterranean-400 hover:underline">Ver detalles de la ruta &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Itinerary 2 -->
+                    <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-utensils mr-1.5"></i> Ruta de Tapeo y Terrazas
+                                </span>
+                                <span class="text-xs text-stone-500 font-medium">~3 horas</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-stone-900 dark:text-white mb-2">Sabor Mediterráneo al Aire Libre</h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-sm mb-6">
+                                Disfruta del sol valenciano degustando unas tellinas, unas bravas o una horchata fresca en las plazas más animadas.
+                            </p>
+                            <!-- Steps -->
+                            <div class="space-y-4 relative pl-6 border-l-2 border-amber-500/30">
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-amber-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">1. Plaza del Tossal</h4>
+                                    <p class="text-xs text-stone-500">Ambiente bohemio, callejuelas del Carmen y bares con encanto.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-amber-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">2. Plaza Redonda</h4>
+                                    <p class="text-xs text-stone-500">Tapas tradicionales en un enclave circular único en Europa.</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-amber-500 border-4 border-white dark:border-stone-900"></span>
+                                    <h4 class="font-semibold text-stone-900 dark:text-white text-sm">3. Plaza del Ayuntamiento</h4>
+                                    <p class="text-xs text-stone-500">Cierre con vistas a los históricos edificios institucionales y un trago fresco.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
+                            <span class="text-xs text-stone-500"><i class="fa-solid fa-map-pin text-amber-500 mr-1"></i> 3 paradas clave</span>
+                            <button onclick="openItineraryModal('Ruta de Tapeo y Terrazas')" class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Ver detalles de la ruta &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Stylized Map Section -->
+        <section id="mapa-interactivo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-mediterranean-500 font-semibold text-sm uppercase tracking-wider">Orientación espacial</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-900 dark:text-white mt-1">Mapa Ilustrado de Plazas</h2>
+                <p class="text-stone-600 dark:text-stone-400 text-sm mt-2">
+                    Visualiza la distribución de las plazas en el casco histórico de Valencia y haz clic en los marcadores para seleccionarlas al instante.
+                </p>
+            </div>
+
+            <!-- Stylized Map Box -->
+            <div class="relative bg-stone-200 dark:bg-stone-900 rounded-3xl overflow-hidden shadow-xl border border-stone-300 dark:border-stone-800 h-[420px] flex items-center justify-center p-6">
+                <!-- Background grid/decorative lines simulating Ciutat Vella -->
+                <div class="absolute inset-0 opacity-10 dark:opacity-25 bg-[radial-gradient(#e07a5f_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-[85%] h-[85%] border-2 border-dashed border-stone-400 dark:border-stone-700 rounded-full flex items-center justify-center">
+                        <span class="text-xs tracking-widest text-stone-400 uppercase font-bold">Ciutat Vella - Casco Antiguo</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Pins -->
+                <div class="absolute inset-0 w-full h-full">
+                    <!-- Pin: Ayuntamiento -->
+                    <button onclick="openModalById('Ayuntamiento')" class="absolute bottom-[20%] left-[45%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">Ayuntamiento</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50 animate-pulse">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+
+                    <!-- Pin: Virgen -->
+                    <button onclick="openModalById('Virgen')" class="absolute top-[28%] left-[55%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">La Virgen</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50 animate-pulse">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+
+                    <!-- Pin: Reina -->
+                    <button onclick="openModalById('Reina')" class="absolute top-[42%] left-[58%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">La Reina</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+
+                    <!-- Pin: Mercado -->
+                    <button onclick="openModalById('Mercado')" class="absolute top-[38%] left-[38%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">El Mercado</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+
+                    <!-- Pin: Redonda -->
+                    <button onclick="openModalById('Redonda')" class="absolute top-[52%] left-[52%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">Redonda</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+
+                    <!-- Pin: Tossal -->
+                    <button onclick="openModalById('Tossal')" class="absolute top-[30%] left-[30%] group flex flex-col items-center focus:outline-none transition-transform hover:scale-110">
+                        <span class="bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-md mb-1 opacity-90 group-hover:opacity-100">El Tossal</span>
+                        <div class="w-6 h-6 rounded-full bg-mediterranean-500 flex items-center justify-center text-white text-xs shadow-lg ring-4 ring-white/50 dark:ring-stone-900/50">
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="absolute bottom-4 left-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-medium text-stone-600 dark:text-stone-300 border border-stone-200 dark:border-stone-800 shadow-sm">
+                    <i class="fa-solid fa-circle-info text-mediterranean-500 mr-1"></i> Pulsa en cualquier marcador para abrir su tarjeta informativa.
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="consejos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-mediterranean-500/10 dark:bg-mediterranean-900/10 rounded-3xl p-8 sm:p-12 border border-mediterranean-500/20">
+                <div class="max-w-3xl mx-auto text-center space-y-4">
+                    <span class="text-mediterranean-600 dark:text-mediterranean-400 font-semibold text-xs uppercase tracking-widest">Recomendaciones del viajero</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-stone-900 dark:text-white">Consejos para recorrer las plazas</h3>
+                    <p class="text-stone-600 dark:text-stone-300 text-sm">
+                        Valencia es una ciudad completamente llana y perfecta para recorrer a pie o en bicicleta. Las mañanas son ideales para la fotografía arquitectónica debido a la luz del Mediterráneo, mientras que las tardes invitan a disfrutar de las terrazas animadas.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-mediterranean-500 flex items-center justify-center text-white shadow">
+                    <i class="fa-solid fa-landmark text-sm"></i>
+                </div>
+                <span class="font-bold text-stone-900 dark:text-white">Plazas de Valencia</span>
+            </div>
+            <p class="text-xs text-stone-500 dark:text-stone-400">
+                Guía interactiva creada para descubrir el patrimonio y la vida urbana valenciana. &copy; 2026.
+            </p>
+            <div class="flex items-center gap-4 text-stone-400">
+                <a href="#" class="hover:text-mediterranean-500 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                <a href="#" class="hover:text-mediterranean-500 transition-colors"><i class="fa-brands fa-twitter text-lg"></i></a>
+                <a href="#" class="hover:text-mediterranean-500 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div id="modal-content" class="bg-white dark:bg-stone-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200 dark:border-stone-800 transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Modal Header / Image -->
+            <div class="relative h-64 sm:h-80 w-full overflow-hidden">
+                <img id="modal-img" src="" alt="Plaza" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <button onclick="closeModal()" aria-label="Cerrar modal" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <div class="absolute bottom-6 left-6 right-6">
+                    <span id="modal-badge" class="bg-mediterranean-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block"></span>
+                    <h2 id="modal-title" class="text-2xl sm:text-4xl font-extrabold text-white"></h2>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h3 class="text-xs uppercase tracking-widest font-bold text-mediterranean-500 mb-2">Descripción General</h3>
+                    <p id="modal-description" class="text-stone-700 dark:text-stone-300 leading-relaxed text-sm sm:text-base"></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stone-200 dark:border-stone-800">
+                    <div>
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-mediterranean-500 mb-2">
+                            <i class="fa-solid fa-book-open mr-1"></i> Historia y Origen
+                        </h3>
+                        <p id="modal-history" class="text-stone-600 dark:text-stone-400 text-sm leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-mediterranean-500 mb-2">
+                            <i class="fa-solid fa-lightbulb mr-1"></i> Curiosidades
+                        </h3>
+                        <p id="modal-curiosities" class="text-stone-600 dark:text-stone-400 text-sm leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-stone-200 dark:border-stone-800">
+                    <h3 class="text-xs uppercase tracking-widest font-bold text-mediterranean-500 mb-3">
+                        <i class="fa-solid fa-compass mr-1"></i> Qué ver cerca
+                    </h3>
+                    <div id="modal-nearby" class="flex flex-wrap gap-2">
+                        <!-- Nearby items populated via JS -->
+                    </div>
+                </div>
+
+                <div class="pt-6 flex justify-end">
+                    <button onclick="closeModal()" class="bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 px-6 py-2.5 rounded-xl text-sm font-semibold transition-colors">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data for Plazas in Valencia
+        const plazasData = [
+            {
+                id: "Ayuntamiento",
+                name: "Plaza del Ayuntamiento",
+                category: "monumental",
+                categoryName: "Monumental",
+                image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80",
+                description: "El epicentro neurálgico y político de Valencia. Una gran plaza de forma triangular rodeada de edificios imponentes de estilo neoclásico y racionalista.",
+                history: "Antiguamente ocupada por el convento de San Francisco, la plaza se fue abriendo a finales del siglo XIX y principios del XX para dotar a la ciudad de un gran espacio representativo y diáfano.",
+                curiosities: "Es el escenario principal de las famosas 'Mascletás' durante las Fallas y acoge mercados navideños y ferias artesanales a lo largo del año.",
+                nearby: ["Edificio de Correos", "Estación del Norte", "Mercado Central", "Calle San Vicente"]
+            },
+            {
+                id: "Virgen",
+                name: "Plaza de la Virgen",
+                category: "historica",
+                categoryName: "Histórica",
+                image: "https://images.unsplash.com/photo-1543785307-160a37f29e12?auto=format&fit=crop&w=800&q=80",
+                description: "El corazón histórico y espiritual de la ciudad, situada sobre el antiguo foro romano de Valentia. Concentra algunos de los monumentos más sagrados.",
+                history: "Testigo de más de 2000 años de historia, sus cimientos guardan restos romanos. Durante la Edad Media albergaba mercados y celebraciones gremiales.",
+                curiosities: "La fuente central representa al río Turia rodeado de ocho acequias históricas esculpidas en bronce. Cada jueves se reúne aquí el Tribunal de las Aguas.",
+                nearby: ["Basílica de la Virgen", "Catedral de Valencia", "Almoina", "Calle Caballeros"]
+            },
+            {
+                id: "Reina",
+                name: "Plaza de la Reina",
+                category: "monumental",
+                categoryName: "Monumental",
+                image: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=800&q=80",
+                description: "Una de las plazas más concurridas, elegantes y animadas de Valencia, totalmente peatonalizada y presidida por la emblemática Torre del Micalet.",
+                history: "Creada en el siglo XIX tras el derribo de manzanas de casas antiguas para conectar el centro religioso con las nuevas vías de expansión urbana.",
+                curiosities: "Es el punto geométrico de referencia desde el cual se numeran tradicionalmente las calles de la ciudad y donde se sirven las mejores horchatas.",
+                nearby: ["Torre del Micalet", "Puerta de los Hierros (Catedral)", "Calle Santa Catalina", "Iglesia de Santa Catalina"]
+            },
+            {
+                id: "Mercado",
+                name: "Plaza del Mercado",
+                category: "comercial",
+                categoryName: "Comercial / Ocio",
+                image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80",
+                description: "Un hervidero de color, arquitectura modernista y comercio tradicional que congrega tres joyas arquitectónicas inigualables.",
+                history: "Históricamente fue el gran zoco y mercado al aire libre de la ciudad medieval, donde se celebraban torneos caballerescos y ejecuciones públicas.",
+                curiosities: "Alberga el contraste perfecto entre el gótico civil de la Lonja de la Seda y la estructura modernista de hierro y cristal del Mercado Central.",
+                nearby: ["Mercado Central", "Lonja de la Seda", "Iglesia de los Santos Juanes", "Plaza del Tossal"]
+            },
+            {
+                id: "Redonda",
+                name: "Plaza Redonda",
+                category: "bohemia",
+                categoryName: "Bohemia / Encanto",
+                image: "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=800&q=80",
+                description: "Un rincón singular e insólito de forma circular cerrada, conocido popularmente como 'el hueco' y famoso por su ambiente íntimo y artesanal.",
+                history: "Diseñada en el siglo XIX por el arquitecto Salvador Escrig como un mercado cerrado de planta circular, renovada recientemente manteniendo su esencia.",
+                curiosities: "En su centro cuenta con una fuente clásica y está rodeada de comercios tradicionales de encajes, abanicos, recuerdos y bares de tapas.",
+                nearby: ["Calle San Fernando", "Iglesia de Santa Catalina", "Plaza del Ayuntamiento", "Lonja de la Seda"]
+            },
+            {
+                id: "Tossal",
+                name: "Plaza del Tossal",
+                category: "bohemia",
+                categoryName: "Bohemia / Encanto",
+                image: "https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=800&q=80",
+                description: "El epicentro de la vida bohemia y nocturna del Barrio del Carmen. Una plaza llena de terrazas juveniles, arte urbano y ambiente cultural.",
+                history: "Situada en uno de los puntos más elevados del antiguo recinto amurallado islámico, donde se ubicaba una torre defensiva de la muralla.",
+                curiosities: "Bajo la plaza se encuentra el Espacio Tossal, un museo arqueológico subterráneo que muestra los restos de la muralla islámica del siglo XII.",
+                nearby: ["Espacio Tossal", "Calle Caballeros", "IVAM (Arte Moderno)", "Portal de Valldigna"]
+            }
+        ];
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        function updateThemeIcon() {
+            if (htmlElement.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Initialize theme based on system or preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+        updateThemeIcon();
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+            updateThemeIcon();
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Render Plazas Grid
+        const plazasGrid = document.getElementById('plazas-grid');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('search-input');
+        const categoryFilter = document.getElementById('category-filter');
+        const searchBtn = document.getElementById('search-btn');
+
+        function renderPlazas(filteredData) {
+            plazasGrid.innerHTML = '';
+            if (filteredData.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            filteredData.forEach(plaza => {
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-stone-900 rounded-3xl overflow-hidden shadow-md hover:shadow-xl border border-stone-200 dark:border-stone-800 transition-all duration-300 flex flex-col justify-between group cursor-pointer";
+                card.onclick = () => openModal(plaza.id);
+
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${plaza.image}" alt="${plaza.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-white/90 dark:bg-stone-900/90 backdrop-blur-md text-stone-900 dark:text-stone-100 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                                ${plaza.categoryName}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-stone-900 dark:text-white group-hover:text-mediterranean-500 transition-colors">${plaza.name}</h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-sm mt-2 line-clamp-3">${plaza.description}</p>
+                        </div>
+                        <div class="pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs font-semibold text-mediterranean-600 dark:text-mediterranean-400">
+                            <span>Ver detalles y curiosidades</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                `;
+                plazasGrid.appendChild(card);
+            });
+        }
+
+        // Filter Logic
+        function filterPlazas() {
+            const query = searchInput.value.toLowerCase().trim();
+            const category = categoryFilter.value;
+
+            const filtered = plazasData.filter(plaza => {
+                const matchesQuery = plaza.name.toLowerCase().includes(query) || plaza.description.toLowerCase().includes(query);
+                const matchesCategory = category === 'all' || plaza.category === category;
+                return matchesQuery && matchesCategory;
+            });
+
+            renderPlazas(filtered);
+        }
+
+        searchInput.addEventListener('input', filterPlazas);
+        categoryFilter.addEventListener('change', filterPlazas);
+        searchBtn.addEventListener('click', filterPlazas);
+
+        // Initial render
+        renderPlazas(plazasData);
+
+        // Modal Logic
+        const detailModal = document.getElementById('detail-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalImg = document.getElementById('modal-img');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalHistory = document.getElementById('modal-history');
+        const modalCuriosities = document.getElementById('modal-curiosities');
+        const modalNearby = document.getElementById('modal-nearby');
+
+        function openModal(id) {
+            const plaza = plazasData.find(p => p.id === id);
+            if (!plaza) return;
+
+            modalImg.src = plaza.image;
+            modalBadge.textContent = plaza.categoryName;
+            modalTitle.textContent = plaza.name;
+            modalDescription.textContent = plaza.description;
+            modalHistory.textContent = plaza.history;
+            modalCuriosities.textContent = plaza.curiosities;
+
+            modalNearby.innerHTML = '';
+            plaza.nearby.forEach(item => {
+                const tag = document.createElement('span');
+                tag.className = "bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 text-xs font-medium px-3 py-1.5 rounded-lg";
+                tag.textContent = item;
+                modalNearby.appendChild(tag);
+            });
+
+            detailModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function openModalById(id) {
+            openModal(id);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                detailModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close on background click
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) {
+                closeModal();
+            }
+        });
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !detailModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Itinerary Modal helper
+        function openItineraryModal(title) {
+            // Re-use or show brief alert info in modal or scroll to top
+            alert(`Has seleccionado la ${title}. Prepara tus zapatillas y disfruta del recorrido.`);
+        }
+    </script>
+</body>
+</html>
