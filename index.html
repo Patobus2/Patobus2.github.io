@@ -1,64 +1,745 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web de prova · GitHub Pages</title>
-<meta name="description" content="Pàgina estàtica de prova per desplegar a GitHub Pages">
-<link rel="icon" href="data:,">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisajes de la Comunidad Valenciana | El latido del Mediterráneo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mediterranean: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        sun: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        sea: {
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom smooth scrollbar and glassmorphism styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-500 selection:text-white">
 
-<header class="hero">
-  <div class="container">
-    <span class="badge">✓ En línia</span>
-    <h1>La teua web estàtica funciona</h1>
-    <p class="lead">Si veus aquesta pàgina és perquè el desplegament a GitHub Pages ha anat bé.</p>
-    <div id="clock" class="clock" aria-live="polite"></div>
-  </div>
-</header>
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+                    <i data-lucide="compass" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-slate-900 block leading-none">Comunitat Valenciana</span>
+                    <span class="text-xs font-medium text-emerald-600 uppercase tracking-widest">Paisajes Naturales</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#paisajes" class="hover:text-emerald-600 transition-colors">Paisajes</a>
+                <a href="#rutas" class="hover:text-emerald-600 transition-colors">Rutas Sostenibles</a>
+                <a href="#provincias" class="hover:text-emerald-600 transition-colors">Provincias</a>
+                <a href="#consejos" class="hover:text-emerald-600 transition-colors">Consejos Verdes</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="#paisajes" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm shadow-sm transition-all shadow-emerald-600/20 hover:shadow-md hover:shadow-emerald-600/30">
+                    <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i> Explorar Destinos
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Abrir menú">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#paisajes" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">Paisajes</a>
+            <a href="#rutas" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">Rutas Sostenibles</a>
+            <a href="#provincias" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">Provincias</a>
+            <a href="#consejos" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">Consejos Verdes</a>
+        </div>
+    </header>
 
-<main class="container">
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-slate-950 text-white">
+        <!-- Background decorative gradients & image -->
+        <div class="absolute inset-0 opacity-40 mix-blend-overlay">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=2000" alt="Paisaje Comunidad Valenciana" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-sun-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-  <section class="grid">
-    <article class="card">
-      <h2>HTML5</h2>
-      <p>Estructura semàntica bàsica, sense frameworks ni dependències externes.</p>
-    </article>
-    <article class="card">
-      <h2>CSS3</h2>
-      <p>Estils propis, disseny responsiu i variables CSS per canviar el tema fàcilment.</p>
-    </article>
-    <article class="card">
-      <h2>JavaScript</h2>
-      <p>Un xicotet script que actualitza el rellotge i el comptador de la pàgina.</p>
-    </article>
-  </section>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm">
+                    <i data-lucide="sun" class="w-3.5 h-3.5 text-sun-500"></i> Alicante • Castellón • Valencia
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none mb-6">
+                    Descubre la magia natural de la <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-sun-400">Comunidad Valenciana</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed mb-8 max-w-2xl">
+                    Un territorio donde el mar Mediterráneo abraza imponentes cumbres montañosas, profundos valles fluviales y humedales de biodiversidad única. Explora rincones inolvidables entre la brisa marina y el aroma a pinar.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#paisajes" class="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold flex items-center gap-2 shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02]">
+                        <i data-lucide="map" class="w-5 h-5"></i> Explorar Paisajes
+                    </a>
+                    <a href="#rutas" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold flex items-center gap-2 backdrop-blur-sm transition-all hover:scale-[1.02]">
+                        <i data-lucide="footprints" class="w-5 h-5 text-sun-400"></i> Ver Rutas Recomendadas
+                    </a>
+                </div>
+            </div>
 
-  <section class="panel">
-    <h2>Comptador de prova</h2>
-    <p>Prem el botó per comprovar que el JavaScript s'executa correctament.</p>
-    <div class="counter">
-      <button id="btn-minus" aria-label="Restar">−</button>
-      <span id="count">0</span>
-      <button id="btn-plus" aria-label="Sumar">+</button>
+            <!-- Quick stats grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-12 border-t border-slate-800/80">
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <span class="block text-3xl font-bold text-emerald-400 mb-1">22+</span>
+                    <span class="text-sm text-slate-400">Parques Naturales Protegidos</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <span class="block text-3xl font-bold text-sun-400 mb-1">500+ km</span>
+                    <span class="text-sm text-slate-400">De Costa y Calas Cristalinas</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <span class="block text-3xl font-bold text-sky-400 mb-1">3 Provincias</span>
+                    <span class="text-sm text-slate-400">Alicante, Castellón y Valencia</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <span class="block text-3xl font-bold text-teal-400 mb-1">300+</span>
+                    <span class="text-sm text-slate-400">Días de Sol al Año</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content & Filterable Catalog -->
+    <section id="paisajes" class="py-20 bg-slate-100/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-emerald-600 font-semibold text-sm uppercase tracking-wider block mb-2">Catálogo de Destinos</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Paisajes que quitan el aliento</h2>
+                <p class="text-slate-600 mt-3 text-base sm:text-lg">
+                    Filtra por provincia o tipo de ecosistema y encuentra tu próxima escapada natural en tierras valencianas.
+                </p>
+            </div>
+
+            <!-- Filter Controls Container -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-10">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    
+                    <!-- Province Filters -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Provincia</label>
+                        <div class="flex flex-wrap gap-2" id="province-filters">
+                            <button data-province="all" class="filter-prov px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-emerald-600 text-white shadow-sm">Todas</button>
+                            <button data-province="Alicante" class="filter-prov px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Alicante</button>
+                            <button data-province="Castellón" class="filter-prov px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Castellón</button>
+                            <button data-province="Valencia" class="filter-prov px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Valencia</button>
+                        </div>
+                    </div>
+
+                    <!-- Landscape Type Filters -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Tipo de Paisaje</label>
+                        <div class="flex flex-wrap gap-2" id="type-filters">
+                            <button data-type="all" class="filter-type px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-emerald-600 text-white shadow-sm">Todos</button>
+                            <button data-type="Playas y calas" class="filter-type px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Playas y Calas</button>
+                            <button data-type="Parques Naturales y Montaña" class="filter-type px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Montaña y Parques</button>
+                            <button data-type="Humedales y Albuferas" class="filter-type px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Humedales</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards will be dynamically loaded via JavaScript -->
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto text-slate-400 mb-4">
+                    <i data-lucide="search-x" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800">No se encontraron paisajes con estos filtros</h3>
+                <p class="text-slate-500 text-sm mt-1">Prueba combinando otras provincias o tipos de paisaje.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="modal-content" class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300">
+            <!-- Modal Header with Image -->
+            <div class="relative h-72 sm:h-80 w-full overflow-hidden bg-slate-900">
+                <img id="modal-img" src="" alt="Paisaje" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                <button id="close-modal" class="absolute top-4 right-4 p-2 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white backdrop-blur-md transition-colors" aria-label="Cerrar modal">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <div class="absolute bottom-6 left-6 right-6">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span id="modal-province-badge" class="px-3 py-1 rounded-lg bg-emerald-600 text-white text-xs font-semibold uppercase tracking-wider">Provincia</span>
+                        <span id="modal-type-badge" class="px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-medium">Tipo</span>
+                    </div>
+                    <h2 id="modal-title" class="text-2xl sm:text-4xl font-bold text-white tracking-tight">Título del Paisaje</h2>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Descripción Detallada</h3>
+                    <p id="modal-desc" class="text-slate-600 text-base leading-relaxed"></p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
+                    <div class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100/60">
+                        <div class="flex items-center gap-2 text-emerald-700 font-semibold text-sm mb-1">
+                            <i data-lucide="navigation" class="w-4 h-4"></i> Cómo llegar
+                        </div>
+                        <p id="modal-access" class="text-xs text-slate-600 leading-normal"></p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-sun-50/50 border border-sun-100/65">
+                        <div class="flex items-center gap-2 text-sun-600 font-semibold text-sm mb-1">
+                            <i data-lucide="calendar" class="w-4 h-4"></i> Mejor época
+                        </div>
+                        <p id="modal-season" class="text-xs text-slate-600 leading-normal"></p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-sky-50/50 border border-sky-100/60">
+                        <div class="flex items-center gap-2 text-sky-700 font-semibold text-sm mb-1">
+                            <i data-lucide="lightbulb" class="w-4 h-4"></i> Consejos verdes
+                        </div>
+                        <p id="modal-tips" class="text-xs text-slate-600 leading-normal"></p>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button id="close-modal-btn" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm transition-colors">
+                        Cerrar ventana
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <section class="panel">
-    <h2>Informació de l'entorn</h2>
-    <ul id="env-info" class="env-list"></ul>
-  </section>
+    <!-- Routes & Sustainable Tourism Section -->
+    <section id="rutas" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-emerald-600 font-semibold text-sm uppercase tracking-wider block mb-2">Turismo Sostenible</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-4">Rutas recomendadas para conectar con la naturaleza</h2>
+                    <p class="text-slate-600 text-base leading-relaxed mb-6">
+                        La Comunidad Valenciana ofrece una red excepcional de senderos homologados (GR y PR) y Vías Verdes ideales para recorrer a pie o en bicicleta sin dejar huella ecológica.
+                    </p>
+                    <ul class="space-y-4 text-slate-700 font-medium">
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <span>Respeto absoluto por la flora y fauna autóctona.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <span>Apoyo al producto local y gastronomía de proximidad (km 0).</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <span>Gestión responsable de residuos y uso de agua en entornos naturales.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:shadow-xl transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="mountain" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Ruta de los Acantilados de Benitatxell</h3>
+                        <p class="text-sm text-slate-600 mb-4">Recorrido costero por calas escondidas entre acantilados de piedra caliza en Alicante.</p>
+                        <div class="flex items-center justify-between text-xs font-semibold text-emerald-600 pt-3 border-t border-slate-200">
+                            <span>Alicante • Costera</span>
+                            <span>Media dificultad</span>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:shadow-xl transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="trees" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Penyagolosa: El Gigante de Piedra</h3>
+                        <p class="text-sm text-slate-600 mb-4">Ascensión cumbre al pico más emblemático de Castellón entre bosques centenarios.</p>
+                        <div class="flex items-center justify-between text-xs font-semibold text-teal-600 pt-3 border-t border-slate-200">
+                            <span>Castellón • Alta Montaña</span>
+                            <span>Alta dificultad</span>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:shadow-xl transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-sun-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="sunset" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Atardecer en la Albufera de Valencia</h3>
+                        <p class="text-sm text-slate-600 mb-4>Paseo en barca tradicional y observación de aves en el humedal más famoso de Valencia.</p>
+                        <div class="flex items-center justify-between text-xs font-semibold text-sun-600 pt-3 border-t border-slate-200">
+                            <span>Valencia • Humedal</span>
+                            <span>Fácil</span>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:shadow-xl transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="droplet" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Nacimiento del Río Vinalopó</h3>
+                        <p class="text-sm text-slate-600 mb-4">Manantiales, molinos históricos y vegetación de ribera en Bocairent y Banyeres.</p>
+                        <div class="flex items-center justify-between text-xs font-semibold text-sky-600 pt-3 border-t border-slate-200">
+                            <span>Valencia/Alicante • Interior</span>
+                            <span>Fácil / Moderada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</main>
+    <!-- Provinces Highlight Section -->
+    <section id="provincias" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-emerald-400 font-semibold text-sm uppercase tracking-wider block mb-2">Tres mundos en uno</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Las tres provincias valencianas</h2>
+                <p class="text-slate-400 mt-3">Desde las cimas del norte de Castellón hasta las palmeras del sur de Alicante.</p>
+            </div>
 
-<footer class="site-footer">
-  <div class="container">
-    <p>Pàgina de prova generada per pujar a GitHub Pages.</p>
-  </div>
-</footer>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Castellon -->
+                <div class="relative rounded-3xl overflow-hidden group h-96 flex flex-col justify-end p-8 border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800" alt="Castellón" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1 block">Norte mediterráneo</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">Castellón</h3>
+                        <p class="text-slate-300 text-sm mb-4">Tierra de castillos medievales, pueblos con encanto interior como Morella y agrestes paisajes de montaña.</p>
+                        <button onclick="filterByProvinceShortcut('Castellón')" class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-xl transition-colors">
+                            Ver paisajes de Castellón <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
 
-<script src="js/script.js"></script>
+                <!-- Valencia -->
+                <div class="relative rounded-3xl overflow-hidden group h-96 flex flex-col justify-end p-8 border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&q=80&w=800" alt="Valencia" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-wider text-sun-400 mb-1 block">Corazón de la huerta</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">Valencia</h3>
+                        <p class="text-slate-300 text-sm mb-4">Humedales legendarios, profundos barrancos fluviales, parques naturales y una vibrante cultura junto al mar.</p>
+                        <button onclick="filterByProvinceShortcut('Valencia')" class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-xl transition-colors">
+                            Ver paisajes de Valencia <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Alicante -->
+                <div class="relative rounded-3xl overflow-hidden group h-96 flex flex-col justify-end p-8 border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=800" alt="Alicante" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-1 block">Costa Blanca y cumbres</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">Alicante</h3>
+                        <p class="text-slate-300 text-sm mb-4">Calas turquesas escondidas, palmerales históricos y majestuosos peñones que se adentran en el mar.</p>
+                        <button onclick="filterByProvinceShortcut('Alicante')" class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-xl transition-colors">
+                            Ver paisajes de Alicante <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eco Tips Section -->
+    <section id="consejos" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-3xl text-white p-8 sm:p-12 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="max-w-3xl relative z-10">
+                    <span class="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold uppercase tracking-wider mb-4 inline-block">Guía del Viajero Responsable</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Disfruta cuidando nuestros parajes</h2>
+                    <p class="text-emerald-100 text-base sm:text-lg mb-8 leading-relaxed">
+                        Los paisajes de la Comunidad Valenciana son frágiles y tesoros de todos. Sigue estas sencillas pautas para garantizar su conservación para las futuras generaciones.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+                            <i data-lucide="trash-2" class="w-8 h-8 text-sun-300 mb-3"></i>
+                            <h3 class="font-bold text-base mb-1">Cero Residuos</h3>
+                            <p class="text-xs text-emerald-100">Lleva siempre contigo tus desperdicios y deposítalos en los contenedores adecuados.</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+                            <i data-lucide="flame" class="w-8 h-8 text-sun-300 mb-3"></i>
+                            <h3 class="font-bold text-base mb-1">Prevención de Incendios</h3>
+                            <p class="text-xs text-emerald-100">Prohibido hacer fuego en áreas forestales no autorizadas. Respeta las alertas meteorológicas.</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15">
+                            <i data-lucide="footprints" class="w-8 h-8 text-sun-300 mb-3"></i>
+                            <h3 class="font-bold text-base mb-1">Caminos Autorizados</h3>
+                            <p class="text-xs text-emerald-100">No salgas de los senderos señalizados para proteger la flora y evitar la erosión del suelo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold">
+                        <i data-lucide="compass" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-white font-bold text-lg">Comunitat Valenciana Natural</span>
+                </div>
+                <div class="flex flex-wrap gap-6 text-sm">
+                    <a href="#paisajes" class="hover:text-white transition-colors">Paisajes</a>
+                    <a href="#rutas" class="hover:text-white transition-colors">Rutas Sostenibles</a>
+                    <a href="#provincias" class="hover:text-white transition-colors">Provincias</a>
+                    <a href="#consejos" class="hover:text-white transition-colors">Consejos Verdes</a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 Paisajes de la Comunidad Valenciana. Todos los derechos reservados.</p>
+                <p>Inspirado en la belleza mediterránea de Alicante, Castellón y Valencia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data set of landscapes across Alicante, Castellón and Valencia
+        const landscapes = [
+            {
+                id: 1,
+                title: "Peñón de Ifach",
+                province: "Alicante",
+                type: "Playas y calas",
+                image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1000",
+                description: "Imponente roca calcárea de 332 metros de altura que se adentra en el mar Mediterráneo en Calpe, unida a tierra por un istmo arenoso. Es Parque Natural y alberga una rica flora endémica y aves marinas.",
+                access: "Acceso a pie desde Calpe por sendero señalizado. Se requiere reserva previa gratuita para subir a la cima.",
+                season: "Primavera y otoño para evitar altas temperaturas.",
+                tips: "Llevar calzado de montaña adecuado debido a la roca pulida en el túnel."
+            },
+            {
+                id: 2,
+                title: "Parque Natural de la Albufera",
+                province: "Valencia",
+                type: "Humedales y Albuferas",
+                image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&q=80&w=1000",
+                description: "El lago más grande de España, rodeado de arrozales y separado del mar por una barra de arena y dunas (la Devesa). Famoso por sus atardeceres mágicos y su enorme riqueza ornitológica.",
+                access: "En autobús urbano (EMT línea 25) desde Valencia o coche hasta El Palmar o El Saler.",
+                season: "Todo el año; otoño e invierno para la observación de aves migratorias.",
+                tips: "Realiza un paseo en barca tradicional al atardecer y prueba la paella local en El Palmar."
+            },
+            {
+                id: 3,
+                title: "Morella y su entorno medieval",
+                province: "Castellón",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=1000",
+                description: "Ciudad amurallada coronada por un castillo rocoso, rodeada por los frondosos bosques y montañas del Maestrat. Un paisaje donde se funden historia milenaria y naturaleza virgen.",
+                access: "En vehículo por la N-232 desde Vinaròs o Castellón.",
+                season: "Primavera y otoño. En invierno son frecuentes las nevadas escénicas.",
+                tips: "Recorre los senderos circulares alrededor de las murallas y degusta las trufas y embutidos locales."
+            },
+            {
+                id: 4,
+                title: "Cala Granadella",
+                province: "Alicante",
+                type: "Playas y calas",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=1000",
+                description: "Considerada una de las calas más bellas de España, situada en Xàbia. Sus aguas cristalinas de tono turquesa están rodeadas de abruptos acantilados cubiertos de pinos.",
+                access: "En coche desde Xàbia por la carretera de la Granadella (acceso regulado en verano).",
+                season: "Junio y septiembre para disfrutar sin masificación.",
+                tips: "Ideal para la práctica de snorkel y kayak. Lleva escarpines para caminar sobre las piedras."
+            },
+            {
+                id: 5,
+                title: "Salto de la Novia (Navajas)",
+                province: "Castellón",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=1000",
+                description: "Espectacular cascada de más de 30 metros de altura donde el río Palancia esculpe un desfiladero de gran belleza paisajística y profunda tradición legendaria.",
+                access: "A pie desde el municipio de Navajas por sendero acondicionado de fácil acceso.",
+                season: "Primavera, cuando el caudal del río es más generoso.",
+                tips: "Visita también el paraje del olmo milenario 'El Ciprés' cercano."
+            },
+            {
+                id: 6,
+                title: "Hoces del Río Cabriel",
+                province: "Valencia",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=1000",
+                description: "Reserva de la Biosfera con aguas cristalinas y uno de los cañones fluviales mejor conservados de Europa. Paisaje de cortados rocosos, bosques de ribera y gran biodiversidad.",
+                access: "En coche por la A-3 hasta Requena o Cofrentes / Villatoya.",
+                season: "Primavera y verano para actividades acuáticas.",
+                tips: "Perfecto para rafting suave, barranquismo y senderismo fluvial."
+            },
+            {
+                id: 7,
+                title: "Sierra de Mariola",
+                province: "Alicante",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=1000",
+                description: "Parque natural montañoso famoso por su rica diversidad botánica (más de 1.200 especies de plantas, muchas medicinales) y por albergar cavas de nieve históricas.",
+                access: "Accesible desde Banyeres de Mariola, Agres o Alcoy.",
+                season: "Primavera, época de floración y aromas a plantas aromáticas.",
+                tips: "Prueba el tradicional 'Herbero', licor destilado con hierbas de la sierra."
+            },
+            {
+                id: 8,
+                title: "Peñagolosa",
+                province: "Castellón",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1000",
+                description: "El techo de Castellón con sus 1.813 metros de altura. Un entorno alpino mediterráneo de bosques de pino albar, tejos milenarios y vistas panorámicas infinitas.",
+                access: "Desde Vistabella del Maestrat o por el Santuario de San Juan de Peñagolosa.",
+                season: "Verano (por su clima fresco) y otoño (paisajes con colores dorados).",
+                tips: "Lleva ropa de abrigo incluso en meses templados debido a la altitud."
+            },
+            {
+                id: 9,
+                title: "Parque Natural del Montgó",
+                province: "Alicante",
+                type: "Parques Naturales y Montaña",
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1000",
+                description: "Impresionante mole montañosa que se extiende entre Dénia y Xàbia, cayendo directamente sobre el mar Mediterráneo en el Cabo de San Antonio.",
+                access: "Varias rutas de senderismo señalizadas desde Dénia y Xàbia.",
+                season: "Otoño e invierno para caminatas sin calor extremo.",
+                tips: "No te pierdas la Reserva Marina del Cabo de San Antonio para buceo."
+            }
+        ];
+
+        // State variables for current filters
+        let currentProvince = 'all';
+        let currentType = 'all';
+
+        // DOM Elements
+        const cardsContainer = document.getElementById('cards-container');
+        const emptyState = document.getElementById('empty-state');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Render Cards function
+        function renderCards() {
+            cardsContainer.innerHTML = '';
+
+            const filtered = landscapes.filter(item => {
+                const matchProv = currentProvince === 'all' || item.province === currentProvince;
+                const matchType = currentType === 'all' || item.type === currentType;
+                return matchProv && matchType;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group';
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden bg-slate-900">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/059669/ffffff?text=Paisaje+Valenciano'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="px-3 py-1 rounded-xl bg-slate-900/70 backdrop-blur-md text-white text-xs font-semibold uppercase tracking-wider">${item.province}</span>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-emerald-300 text-xs font-semibold uppercase tracking-wider block mb-1">${item.type}</span>
+                            <h3 class="text-xl font-bold text-white tracking-tight">${item.title}</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${item.description}</p>
+                        <button onclick="openModal(${item.id})" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 font-semibold text-sm transition-colors flex items-center justify-center gap-2">
+                            <span>Ver detalles y consejos</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            // Re-initialize Lucide icons for newly created elements
+            lucide.createIcons();
+        }
+
+        // Filter event listeners for Provinces
+        document.querySelectorAll('.filter-prov').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-prov').forEach(b => {
+                    b.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                });
+                e.target.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                e.target.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+
+                currentProvince = e.target.getAttribute('data-province');
+                renderCards();
+            });
+        });
+
+        // Filter event listeners for Landscape Types
+        document.querySelectorAll('.filter-type').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-type').forEach(b => {
+                    b.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                });
+                e.target.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                e.target.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+
+                currentType = e.target.getAttribute('data-type');
+                renderCards();
+            });
+        });
+
+        // Shortcut to filter by province from the provinces section
+        window.filterByProvinceShortcut = function(prov) {
+            currentProvince = prov;
+            currentType = 'all';
+
+            // Update UI buttons
+            document.querySelectorAll('.filter-prov').forEach(b => {
+                if (b.getAttribute('data-province') === prov) {
+                    b.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                    b.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+                } else {
+                    b.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                }
+            });
+
+            document.querySelectorAll('.filter-type').forEach(b => {
+                if (b.getAttribute('data-type') === 'all') {
+                    b.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                    b.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+                } else {
+                    b.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                }
+            });
+
+            renderCards();
+
+            // Scroll to catalog section
+            document.getElementById('paisajes').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Modal functionality
+        const modal = document.getElementById('detail-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        window.openModal = function(id) {
+            const item = landscapes.find(l => l.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-province-badge').textContent = item.province;
+            document.getElementById('modal-type-badge').textContent = item.type;
+            document.getElementById('modal-desc').textContent = item.description;
+            document.getElementById('modal-access').textContent = item.access;
+            document.getElementById('modal-season').textContent = item.season;
+            document.getElementById('modal-tips').textContent = item.tips;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        };
+
+        function closeModalFunc() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeModalFunc);
+        document.getElementById('close-modal-btn').addEventListener('click', closeModalFunc);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModalFunc();
+        });
+
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initial render on load
+        window.onload = function() {
+            renderCards();
+            lucide.createIcons();
+        };
+    </script>
 </body>
 </html>
